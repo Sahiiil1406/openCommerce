@@ -19,7 +19,7 @@ router.post('/create',async(req,res)=>{
 })
 
 router.post('/get',async(req,res)=>{
-   // console.log(req.body.token)
+   console.log(req.body.token)
     const to=req.body.to || BPP_URLS[0];
     try {
         const order=await axios.post(`${to}/order/get`,req.body);

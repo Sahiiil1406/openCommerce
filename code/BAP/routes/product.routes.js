@@ -19,9 +19,9 @@ router.post('/getProducts',async(req,res)=>{
 
 router.post('/getProductById',async(req,res)=>{
     try {
-    //console.log(req.body)
     const token=req.cookies.token;
     req.body.token=req.cookies.token;
+    console.log(token)
     const gateway=await axios.post(`${process.env.GATEWAY_URL}/product/getProductById`,req.body);
     return res.json({
         message:'Get Product by ID successfully',

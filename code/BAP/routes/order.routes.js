@@ -1,7 +1,8 @@
 const express=require('express')
 const router=express.Router()
+const axios=require('axios')
 
-router.post('/createOrder',async()=>{
+router.post('/createOrder',async(req,res)=>{
     try {
         const token=req.cookies.token;
         req.body.token=req.cookies.token;
@@ -14,11 +15,12 @@ router.post('/createOrder',async()=>{
     }
 })
 
-router.get('/getOrder',async()=>{
+router.post('/getOrder',async(req,res)=>{
     try {
         const token=req.cookies.token;
-        req.body.token=req.cookies.token;
-        const gateway=await axios.get(`${process.env.GATEWAY_URL}/order/get`,req.body);
+        req.body.token=token;
+        console.log(req.body)
+        const gateway=await axios.post(`${process.env.GATEWAY_URL}/order/get`,req.body);
         return res.json({
             msg:"order fetched succesfully",
             gateway:gateway.data
@@ -28,11 +30,11 @@ router.get('/getOrder',async()=>{
     }
 })
 
-router.get('/getOrderById',async()=>{
+router.post('/getOrderById',async(req,res)=>{
     try {
         const token=req.cookies.token;
-        req.body.token=req.cookies.token;
-        const gateway=await axios.get(`${process.env.GATEWAY_URL}/order/getOrderById`,req.body);
+        req.body.token=token;
+        const gateway=await axios.post(`${process.env.GATEWAY_URL}/order/getOrderById`,req.body);
         return res.json({
             msg:"order fetched succesfully",
             gateway:gateway.data
@@ -42,7 +44,7 @@ router.get('/getOrderById',async()=>{
     }
 })
 
-router.post('/updateOrder',async()=>{
+router.post('/updateOrder',async(req,res)=>{
     try {
         const token=req.cookies.token;
         req.body.token=token;
@@ -56,7 +58,7 @@ router.post('/updateOrder',async()=>{
     }
 })
 
-router.post('/deleteOrder',async()=>{
+router.post('/deleteOrder',async(req,res)=>{
     try {
         const token=req.cookies.token;
         req.body.token=req.cookies.token;

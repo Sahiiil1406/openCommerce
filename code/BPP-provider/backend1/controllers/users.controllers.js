@@ -32,6 +32,8 @@ const registerUser = async (req, res) => {
     if (userExists) {
       return res.status(400).json({ mssg: "User already exists" });
     }
+    
+console.log("Hello")
 
     const user = await User.create({
       name,
@@ -39,27 +41,13 @@ const registerUser = async (req, res) => {
       password,
     });
 
-    const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET, {
-      expiresIn: "15d",
-    });
-
-    res.cookie("token", token, {
-      httpOnly: true,
-      secure: process.env.NODE_ENV !== "development",
-      // but the above needs to be true in production
-      sameSite: "strict",
-      maxAge: 15 * 24 * 60 * 60 * 1000,
-      //basically the above thing is 15 days
-    });
-
-    if (user) {
-      res.status(201).json({
-        _id: user._id,
-        name: user.name,
-        email: user.email,
-        isAdmin: user.isAdmin,
-      });
+console.log("jnsn")
+    if(!user){
+      return res.status(400).json({message:"Not able to create user"})
     }
+    return res.status(201).json({
+      user:user
+    });
   } catch (error) {
     res.status(404).json({ error: error.message });
   }

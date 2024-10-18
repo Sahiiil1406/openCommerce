@@ -27,7 +27,8 @@ const getAllProducts = async (req, res) => {
 
 const getSingleProduct = async (req, res) => {
   try {
-    const id = req.params.id;
+    const id = req.body.id;
+    console.log("Hello")
     const product = await Product.findById(id);
     if (!product) return res.status(404).json({ meessage: "Not found!!" });
     res.status(200).json(product);
