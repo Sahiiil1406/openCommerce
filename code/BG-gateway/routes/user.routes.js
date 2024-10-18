@@ -1,0 +1,34 @@
+const express = require('express');
+const router = express.Router();
+const {BPP_URLS} = require('../constant');
+const axios = require('axios');
+
+router.post('/login', async (req, res) => {
+    try {
+        const gateway = await axios.post(`${BPP_URLS[0]}/user/login`, req.body);
+        return res.json({
+            message: 'Login successfully',
+            gateway
+        });
+    } catch (error) {
+        return res.status(500).json({ message: error.message });
+
+    }
+});
+
+router.post('/register', async (req, res) => {
+    try {
+        //console.log(req.body);
+        for(let i=0;i<BPP_URLS.length;i++){
+            const gateway = await axios.post(`${BPP_URLS[i]}/user/register`, req.body);
+        }
+        return res.json({
+            message: 'Register successfully',
+        });
+    } catch (error) {
+        return res.status(500).json({ message: error.message });
+    }
+});
+
+
+module.exports = router
