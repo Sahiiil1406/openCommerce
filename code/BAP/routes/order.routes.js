@@ -7,7 +7,7 @@ router.post('/createOrder',async()=>{
         req.body.token=req.cookies.token;
         const gateway=await axios.post(`${process.env.GATEWAY_URL}/order/create`,req.body);
         return res.json({
-            msg:"order created succesfully"
+            gateway:gateway.data
         })        
     } catch (error) {
         return res.status(500).json({message:error.message}); 
@@ -20,7 +20,8 @@ router.get('/getOrder',async()=>{
         req.body.token=req.cookies.token;
         const gateway=await axios.get(`${process.env.GATEWAY_URL}/order/get`,req.body);
         return res.json({
-            msg:"order fetched succesfully"
+            msg:"order fetched succesfully",
+            gateway:gateway.data
         })        
     } catch (error) {
         return res.status(500).json({message:error.message}); 
@@ -33,7 +34,8 @@ router.get('/getOrderById',async()=>{
         req.body.token=req.cookies.token;
         const gateway=await axios.get(`${process.env.GATEWAY_URL}/order/getOrderById`,req.body);
         return res.json({
-            msg:"order fetched succesfully"
+            msg:"order fetched succesfully",
+            gateway:gateway.data
         })        
     } catch (error) {
         return res.status(500).json({message:error.message}); 
@@ -43,10 +45,11 @@ router.get('/getOrderById',async()=>{
 router.post('/updateOrder',async()=>{
     try {
         const token=req.cookies.token;
-        req.body.token=req.cookies.token;
+        req.body.token=token;
         const gateway=await axios.post(`${process.env.GATEWAY_URL}/order/update`,req.body);
         return res.json({
-            msg:"order updated succesfully"
+            msg:"order updated succesfully",
+            gateway:gateway.data
         })        
     } catch (error) {
         return res.status(500).json({message:error.message}); 
@@ -59,7 +62,8 @@ router.post('/deleteOrder',async()=>{
         req.body.token=req.cookies.token;
         const gateway=await axios.post(`${process.env.GATEWAY_URL}/order/delete`,req.body);
         return res.json({
-            msg:"order deleted succesfully"
+            msg:"order deleted succesfully",
+            gateway:gateway.data
         })        
     } catch (error) {
         return res.status(500).json({message:error.message}); 
