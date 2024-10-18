@@ -66,6 +66,8 @@ export default function SellerDashboard() {
 		{ id: 2, name: "Product B", price: 29.99, stock: 30 },
 		{ id: 3, name: "Product C", price: 39.99, stock: 20 },
 	];
+	
+
 
 	const orders = [
 		{
@@ -99,6 +101,20 @@ export default function SellerDashboard() {
 		{ name: "May", total: 4800 },
 		{ name: "Jun", total: 3800 },
 	];
+	const addProduct = () => {
+		const newProduct = {
+			id: products.length + 1,
+			name: "New Product",
+			price: 40,
+			stock: 50,
+		};
+		//setProducts([...products, newProduct]);
+	};
+
+	const removeProductbyId = () => {
+		products.filter((product) => product.id !== id)
+	}
+
 
 	return (
 		<div className="flex h-screen overflow-hidden">
@@ -368,7 +384,7 @@ export default function SellerDashboard() {
 													</div>
 												</div>
 												<DialogFooter>
-													<Button type="submit">Save Product</Button>
+													<Button type="submit " onClick={addProduct}>Save Product</Button>
 												</DialogFooter>
 											</DialogContent>
 										</Dialog>
@@ -396,7 +412,7 @@ export default function SellerDashboard() {
 														<Button variant="outline" className="mr-2">
 															Edit
 														</Button>
-														<Button variant="destructive">Delete</Button>
+														<Button variant="destructive" onClick={removeProductbyId}>Delete</Button>
 													</TableCell>
 												</TableRow>
 											))}

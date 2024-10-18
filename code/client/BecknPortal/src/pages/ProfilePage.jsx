@@ -11,11 +11,18 @@ import {
 } from "@/components/ui/select";
 import { ShoppingBag, HelpCircle, Trash2 } from "lucide-react";
 import { Avatar } from "@/components/ui/avatar"; // Import the Avatar component
+import {useGetOrderMutation} from "@/store/slice/order";
 export default function ProfilePage() {
 	const [preferredTime, setPreferredTime] = useState("morning");
 	const [phoneNumber, setPhoneNumber] = useState("");
 	const [previousAddresses, setPreviousAddresses] = useState([]);
 	const [pastOrders, setPastOrders] = useState([]);
+	const [getOrder]= useGetOrderMutation()
+
+	const x = async () => {
+		const response = await getOrder();
+		console.log(response);
+	};
 
 	useEffect(() => {
 		// Simulating fetching past orders
@@ -60,6 +67,7 @@ export default function ProfilePage() {
 				zipCode: "67890",
 			},
 		]);
+		x();
 	}, []);
 
 	const deleteAddress = (id) => {
