@@ -11,9 +11,9 @@ const {
   paymentVerification,
 } = require("../controllers/orders.controllers");
 
-router.post("/add", validateToken, addOrderItems);
-router.get("/mine", validateToken, getMyOrders);
-router.get("/getbyID", validateToken, getOrderById);
+router.post("/create",validateToken, addOrderItems);
+router.post("/get",validateToken, getMyOrders);
+router.post("/getOrderById", getOrderById);
 
 //payment verification route
 router.put("/get/:id/pay", validateToken, updateOrderToPaid);

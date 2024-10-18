@@ -10,8 +10,8 @@ const {
 
 const router = express.Router();
 
-router.get("/getAll", getAllProducts);
-router.get("/:id", getSingleProduct);
+router.get("/getProducts", getAllProducts);
+router.post("/getProductById", getSingleProduct);
 //create review for a product
 router.post("/:id/reviews", validateToken, createProductReview);
 router.post("/create", createProduct);

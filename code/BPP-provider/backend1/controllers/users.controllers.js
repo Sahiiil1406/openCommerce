@@ -1,37 +1,28 @@
 const User = require("../models/User.model");
 const jwt = require("jsonwebtoken");
+const bcrypt = require("bcryptjs");
+
 
 const loginUser = async (req, res) => {
   const { email, password } = req.body;
   try {
-    const user = await User.findOne({ email: email });
-
-    if (user && (await user.matchPassword(password))) {
-      const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET, {
-        expiresIn: "15d",
-      });
-
-      res.cookie("token", token, {
-        httpOnly: true,
-        secure: process.env.NODE_ENV !== "development",
-        // but the above needs to be true in production
-        sameSite: "strict",
-        maxAge: 15 * 24 * 60 * 60 * 1000,
-        //basically the above thing is 15 days
-      });
-      res.status(200).json({
-        _id: user._id,
-        name: user.name,
-        email: user.email,
-        isAdmin: user.isAdmin,
-      });
-    } else {
-      res.status(401).json({ mssg: "Invalid email or password" });
+    const user=await User.findOne({email})
+    const isMatch=await bcrypt.compare(password,user.password)
+    if(!isMatch){
+      return res.status(400).json({message:"Invalid credentials"})
     }
+    const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET, {
+      expiresIn: "15d",
+    });
+    return res.status(200).json({
+     user:user,
+      token:token
+    });
+    
   } catch (error) {
-    res.status(500).json({ error: error.message });
+    return res.status(500).json({ message: error.message });
   }
-};
+}
 
 const registerUser = async (req, res) => {
   const { name, email, password } = req.body;
@@ -41,6 +32,8 @@ const registerUser = async (req, res) => {
     if (userExists) {
       return res.status(400).json({ mssg: "User already exists" });
     }
+    
+console.log("Hello")
 
     const user = await User.create({
       name,
@@ -48,27 +41,13 @@ const registerUser = async (req, res) => {
       password,
     });
 
-    const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET, {
-      expiresIn: "15d",
-    });
-
-    res.cookie("token", token, {
-      httpOnly: true,
-      secure: process.env.NODE_ENV !== "development",
-      // but the above needs to be true in production
-      sameSite: "strict",
-      maxAge: 15 * 24 * 60 * 60 * 1000,
-      //basically the above thing is 15 days
-    });
-
-    if (user) {
-      res.status(201).json({
-        _id: user._id,
-        name: user.name,
-        email: user.email,
-        isAdmin: user.isAdmin,
-      });
+console.log("jnsn")
+    if(!user){
+      return res.status(400).json({message:"Not able to create user"})
     }
+    return res.status(201).json({
+      user:user
+    });
   } catch (error) {
     res.status(404).json({ error: error.message });
   }

@@ -79,13 +79,14 @@ const addOrderItems = async (req, res) => {
     if (orderItems && orderItems.length == 0) {
       res.status(400).json({ mssg: "No items ordered" });
     } else {
+      console.log(req.body);
       const order = new Order({
         orderItems: orderItems.map((doc) => ({
           ...doc,
           product: doc._id,
           _id: undefined,
         })),
-        user: req.user._id,
+        user: req.user._id || '67124c529a832fa663bda118',
         shippingAddress,
         paymentMethod,
         itemsPrice,
@@ -103,6 +104,7 @@ const addOrderItems = async (req, res) => {
 
 const getMyOrders = async (req, res) => {
   try {
+
     const orders = await Order.find({ user: req.user._id });
     res.status(200).json(orders);
   } catch (error) {
