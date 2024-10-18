@@ -33,20 +33,20 @@ app.use("/product", ProductRouter);
 app.use("/user", UserRouter);
 app.use("/order", OrderRouter);
 
-// razorpay instance
-// const instance = new Razorpay({
-//   key_id: process.env.RAZORPAY_API_ID,
-//   key_secret: process.env.RAZORPAY_API_SECRET,
-// });
 
-// module.exports = {
-//   instance,
-// };
+const instance = new Razorpay({
+  key_id: process.env.RAZORPAY_API_ID,
+  key_secret: process.env.RAZORPAY_API_SECRET,
+});
 
-// // route to get the razorpay id
-// app.get("/api/getkey", (req, res) => {
-//   res.status(200).json({ razorpayId: process.env.RAZORPAY_API_ID });
-// });
+module.exports = {
+  instance,
+};
+
+// route to get the razorpay id
+app.get("/api/getkey", (req, res) => {
+  res.status(200).json({ razorpayId: process.env.RAZORPAY_API_ID });
+});
 
 app.listen(port, () => {
   connectToDatabase();

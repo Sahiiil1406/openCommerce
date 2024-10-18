@@ -7,6 +7,7 @@ const cookieParser=require('cookie-parser')
 const userRouter=require('./routes/user.routes.js')
 const orderRouter=require('./routes/order.routes.js')
 const productRouter=require('./routes/product.routes.js')
+const dashboardRouter=require('./routes/dashboard.routes.js')
 
 app.use(express.json())
 app.use(express.urlencoded({extended:true}))
@@ -16,6 +17,7 @@ app.use(cors())
 app.use('/user',userRouter)
 app.use('/order',orderRouter)
 app.use('/product',productRouter)
+app.use('/dashboard',dashboardRouter)
 
 
 app.get('/',(req,res)=>{
