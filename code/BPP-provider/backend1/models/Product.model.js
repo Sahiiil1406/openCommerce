@@ -8,34 +8,14 @@ const reviewSchema = new mongoose.Schema(
     },
     name: {
       type: String,
-      required: true,
     },
     rating: {
       type: Number,
-      required: true,
       default: 0,
     },
     comment: {
       type: String,
-      required: true,
     },
-    context:{
-      type:Object,
-      default:{
-        location:{
-          type:String,
-          default:"India"
-        },
-        currency:{
-          type:String,
-          default:"INR"
-        },
-        url:{
-          type:String,
-          default:"http://localhost:8002"
-        }
-      }
-    }
   },
   {
     timestamps: true,
@@ -46,49 +26,56 @@ const productSchema = new mongoose.Schema(
   {
     name: {
       type: String,
-      required: true,
     },
     imageURL: {
       type: String,
-      required: true,
     },
     brand: {
       type: String,
-      required: true,
     },
     category: {
       type: String,
-      required: true,
     },
     description: {
       type: String,
-      required: true,
     },
     reviews: [reviewSchema],
     rating: {
       type: Number,
-      required: true,
       default: 0,
     },
     numReviews: {
       type: Number,
-      required: true,
       default: 0,
     },
     price: {
       type: Number,
-      required: true,
       default: 0,
     },
     countInStock: {
       type: Number,
-      required: true,
       default: 0,
     },
     user: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "User",
-      required: true,
+    },
+    context: {
+      type: Object,
+      default: {
+        location: {
+          type: String,
+          default: "India",
+        },
+        currency: {
+          type: String,
+          default: "INR",
+        },
+        url: {
+          type: String,
+          default: "http://localhost:8002",
+        },
+      },
     },
   },
   {
