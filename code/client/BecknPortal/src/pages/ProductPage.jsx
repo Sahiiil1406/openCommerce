@@ -8,6 +8,7 @@ import {
 	Minus,
 	ShoppingCart,
 } from "lucide-react";
+import ProductCard from "../components/ProductCard";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import {
@@ -37,7 +38,6 @@ const product = {
 	],
 	images: [
 		"https://d2v5dzhdg4zhx3.cloudfront.net/web-assets/images/storypages/primary/ProductShowcasesampleimages/JPEG/Product+Showcase-1.jpg",
-
 		"/placeholder.svg?height=400&width=400",
 		"/placeholder.svg?height=400&width=400",
 	],
@@ -285,24 +285,7 @@ export default function ProductPage() {
 				<h2 className="text-2xl font-bold mb-4">You May Also Like</h2>
 				<div className="grid grid-cols-2 md:grid-cols-4 gap-4">
 					{product.suggestedProducts.map((item) => (
-						<Card
-							key={item.id}
-							className="shadow-lg transition-transform duration-200 hover:shadow-xl"
-						>
-							<CardContent className="p-4">
-								<div className="relative w-full h-40 mb-2">
-									<img
-										src={item.image}
-										alt={item.name}
-										className="object-cover rounded w-full h-full"
-									/>
-								</div>
-								<h3 className="font-medium text-lg">{item.name}</h3>
-								<p className="text-sm text-muted-foreground">
-									${item.price.toFixed(2)}
-								</p>
-							</CardContent>
-						</Card>
+						<ProductCard key={item.id} product={item} />
 					))}
 				</div>
 			</section>

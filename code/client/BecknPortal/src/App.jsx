@@ -15,10 +15,11 @@ import Pricing from "./pages/Pricing";
 import SearchResultsPage from "./pages/SearchResultsPage";
 import TrackOrderPage from "./pages/TrackOrderPage";
 import ProfilePage from "./pages/ProfilePage";
+import SellerPage from "./pages/SellerPage";
 
 function App() {
 	return (
-		<div className="w-full h-full  pt-20">
+		<div className="w-full h-full  pt-16">
 			<Navbar />
 			<Routes>
 				<Route path="/" element={<div>hi</div>} />
@@ -27,11 +28,10 @@ function App() {
 				<Route path="/product" element={<ProductPage />} />
 				<Route path="/orderconfirm" element={<OrderConfirmPage />} />
 				<Route path="/orderdetails" element={<OrderDetails />} />
-
 				<Route path="/order" element={<TrackOrderPage />} />
 				<Route path="/profile" element={<ProfilePage />} />
 				<Route path="/search" element={<SearchResultsPage />} />
-				
+				<Route path="/seller" element={<SellerPage />} />
 				<Route path="/api" element={<ApiDashboard />} />
 				<Route path="/pricing" element={<Pricing />} />{" "}
 				<Route path="/docs" element={<Docs />} />{" "}

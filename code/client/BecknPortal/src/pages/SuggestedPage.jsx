@@ -13,6 +13,7 @@ import {
 	CarouselPrevious,
 } from "@/components/ui/carousel";
 import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
+import ProductCard from "../components/ProductCard";
 
 export default function SuggestedPage() {
 	const categories = [
@@ -190,75 +191,5 @@ export default function SuggestedPage() {
 				</div>
 			</section>
 		</div>
-	);
-}
-
-export function ProductCard({
-	product,
-	truncateAfter = 50,
-	showPercentageDrop = false,
-	originalPrice = 0,
-}) {
-	const percentageDrop =
-		originalPrice && showPercentageDrop
-			? Math.round((1 - product.price / originalPrice) * 100)
-			: null;
-
-	return (
-		<Card className="overflow-hidden">
-			<CardContent className="p-4">
-				<div className="relative">
-					<img
-						src={product.image}
-						alt={product.name}
-						className="w-full h-auto rounded-md object-cover aspect-square"
-					/>
-					{product.offer && (
-						<Badge variant="destructive" className="absolute top-2 left-2">
-							{product.offer}
-						</Badge>
-					)}
-					{percentageDrop && (
-						<Badge variant="secondary" className="absolute bottom-2 right-2">
-							<Percent className="w-3 h-3 mr-1" />
-							{percentageDrop}% OFF
-						</Badge>
-					)}
-				</div>
-				<h3 className="font-semibold mt-2">
-					{product.name.length > truncateAfter
-						? `${product.name.slice(0, truncateAfter)}...`
-						: product.name}
-				</h3>
-				<div className="flex items-center justify-between mt-2">
-					<p className="text-lg font-bold">
-						${parseFloat(product.price).toFixed(2)}
-					</p>
-					{originalPrice && showPercentageDrop && (
-						<p className="text-sm text-muted-foreground line-through">
-							${originalPrice.toFixed(2)}
-						</p>
-					)}
-				</div>
-				{product.rating && (
-					<div className="flex items-center mt-2">
-						{[...Array(5)].map((_, i) => (
-							<Star
-								key={i}
-								className={cn(
-									"w-4 h-4",
-									i < Math.floor(product.rating)
-										? "text-yellow-400 fill-yellow-400"
-										: "text-gray-300"
-								)}
-							/>
-						))}
-						<span className="ml-2 text-sm text-muted-foreground">
-							{product.rating.toFixed(1)}
-						</span>
-					</div>
-				)}
-			</CardContent>
-		</Card>
 	);
 }
