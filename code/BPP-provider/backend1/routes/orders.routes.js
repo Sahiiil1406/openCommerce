@@ -11,10 +11,12 @@ const {
   paymentVerification,
 } = require("../controllers/orders.controllers");
 
-router.post("/", validateToken, addOrderItems);
+router.post("/add", validateToken, addOrderItems);
 router.get("/mine", validateToken, getMyOrders);
-router.get("/:id", validateToken, getOrderById);
-router.put("/:id/pay", validateToken, updateOrderToPaid);
+router.get("/getbyID", validateToken, getOrderById);
+
+//payment verification route
+router.put("/get/:id/pay", validateToken, updateOrderToPaid);
 router.post("/checkout", validateToken, checkout);
 router.post("/paymentverification/:id", validateToken, paymentVerification);
 

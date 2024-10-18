@@ -10,11 +10,11 @@ const {
 
 const router = express.Router();
 
-router.get("/", getAllProducts);
+router.get("/getAll", getAllProducts);
 router.get("/:id", getSingleProduct);
 //create review for a product
 router.post("/:id/reviews", validateToken, createProductReview);
-router.post("/", validateToken, createProduct);
+router.post("/create", createProduct);
 router.delete("/:id", validateToken, deleteProduct);
 
 module.exports = router;

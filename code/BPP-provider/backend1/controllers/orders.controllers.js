@@ -112,7 +112,7 @@ const getMyOrders = async (req, res) => {
 
 const getOrderById = async (req, res) => {
   const id = req.body.id;
-  const order = await Order.findById(id).populate("user", "name email");
+  const order = await Order.findById(id)
 
   if (order) {
     res.status(200).json(order);

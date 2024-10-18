@@ -87,7 +87,7 @@ const createProduct = async (req, res) => {
     const product = new Product({
       name: "Sample name",
       price: 0,
-      user: req.user._id,
+      user: "67124c529a832fa663bda118",
       imageURL: "/images/sample1.jpg",
       brand: "Sample brand",
       category: "Sample category",

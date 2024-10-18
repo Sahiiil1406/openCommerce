@@ -29,9 +29,9 @@ app.get("/", (req, res) => {
   res.send("Api is up and running!!⚙️");
 });
 
-app.use("/api/products", ProductRouter);
-app.use("/api/users", UserRouter);
-app.use("/api/orders", OrderRouter);
+app.use("/product", ProductRouter);
+app.use("/user", UserRouter);
+app.use("/order", OrderRouter);
 
 // razorpay instance
 // const instance = new Razorpay({
