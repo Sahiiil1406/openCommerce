@@ -1,8 +1,8 @@
 require("dotenv").config();
 const express = require("express");
-// const ProductRouter = require("./routes/products.routes");
-// const UserRouter = require("./routes/users.routes");
-// const OrderRouter = require("./routes/orders.routes");
+const ProductRouter = require("./routes/products.routes");
+const UserRouter = require("./routes/users.routes");
+const OrderRouter = require("./routes/orders.routes");
 const cookieParser = require("cookie-parser");
 const Razorpay = require("razorpay");
 const { connectToDatabase } = require("./config/db");
@@ -29,9 +29,9 @@ app.get("/", (req, res) => {
   res.send("Api is up and running!!⚙️");
 });
 
-// app.use("/api/products", ProductRouter);
-// app.use("/api/users", UserRouter);
-// app.use("/api/orders", OrderRouter);
+app.use("/api/products", ProductRouter);
+app.use("/api/users", UserRouter);
+app.use("/api/orders", OrderRouter);
 
 // razorpay instance
 // const instance = new Razorpay({

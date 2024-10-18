@@ -1,5 +1,5 @@
 const express = require("express");
-const { validateToken } = require("../middlewares/auth.middleware");
+const  validateToken = require("../middlewares/auth.middleware");
 const {
   getAllProducts,
   getSingleProduct,
@@ -14,7 +14,7 @@ router.get("/", getAllProducts);
 router.get("/:id", getSingleProduct);
 //create review for a product
 router.post("/:id/reviews", validateToken, createProductReview);
-router.post("/", validateToken, adminCheck, createProduct);
-router.delete("/:id", validateToken, adminCheck, deleteProduct);
+router.post("/", validateToken, createProduct);
+router.delete("/:id", validateToken, deleteProduct);
 
 module.exports = router;
