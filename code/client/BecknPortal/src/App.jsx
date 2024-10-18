@@ -24,7 +24,7 @@ function App() {
 			<Navbar />
 			<Toaster />
 			<Routes>
-				<Route path="/" element={<div>hi</div>} />
+				<Route path="/" element={<LandingPage/>} />
 				<Route path="/auth" element={<AuthPage />} />
 				<Route path="/suggested" element={<SuggestedPage />} />
 				<Route path="/product" element={<ProductPage />} />
@@ -38,7 +38,8 @@ function App() {
 				<Route path="/pricing" element={<Pricing />} />{" "}
 				<Route path="/docs" element={<Docs />} />{" "}
 				<Route path="/help" element={<Help />} />{" "}
-				<Route path="/lp" element={<LandingPage />} />{" "}
+				<Route path="/lp" element={<LandingPage />} />
+
 			</Routes>
 		</div>
 	);
