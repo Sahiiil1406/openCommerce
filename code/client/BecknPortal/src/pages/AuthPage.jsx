@@ -6,22 +6,53 @@ import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
 import { Checkbox } from "@/components/ui/checkbox";
-
 import { Link } from "react-router-dom";
+import { useRegisterMutation, useLoginMutation } from "@/store/slice/user";
+import { toast } from "sonner";
 
 export default function AuthPage() {
 	const [isLogin, setIsLogin] = useState(true);
+	const [email, setEmail] = useState("");
+	const [password, setPassword] = useState("");
+	const [name, setName] = useState("");
+	const [rememberMe, setRememberMe] = useState(false);
+	const [register] = useRegisterMutation();
+	const [login] = useLoginMutation();
+
+	const handleLogin = async (e) => {
+		e.preventDefault();
+		try {
+			const result = await login({ email, password }).unwrap();
+			toast.success("Logged in successfully!");
+			// Handle successful login (e.g., redirect)
+		} catch (error) {
+			toast.error(error.data?.message || "Login failed.");
+		}
+	};
+
+	const handleRegister = async (e) => {
+		e.preventDefault();
+		if (!name) {
+			toast.error("Full name is required.");
+			return;
+		}
+		try {
+			const result = await register({ name, email, password }).unwrap();
+			toast.success("Registration successful! Please log in.");
+			setIsLogin(true); // Switch to login tab after successful registration
+		} catch (error) {
+			toast.error(error.data?.message || "Registration failed.");
+		}
+	};
 
 	return (
 		<div className="flex h-screen text-white">
 			{/* Right side - Image */}
 			<div
 				className="flex-1 bg-cover bg-center bg-yellow-600"
-				style={{
-					backgroundImage: "url('loginbg.svg')",
-				}}
+				style={{ backgroundImage: "url('loginbg.svg')" }}
 			>
-				<div className="h-full w-full   flex items-center justify-center">
+				<div className="h-full w-full flex items-center justify-center">
 					<div className="text-white text-center max-w-md px-4">
 						<h1 className="text-4xl font-bold mb-4">Welcome to Our Platform</h1>
 						<p className="text-xl mb-6">
@@ -40,9 +71,8 @@ export default function AuthPage() {
 			</div>
 
 			{/* Left side - Plain background with form */}
-			<div className="w-[360px] bg-background flex items-center justify-center relative  ">
-				{/* Form container */}
-				<Card className="w-[450px] p-8 bg-card shadow-xl  z-20  absolute left-[-64%] border-border">
+			<div className="w-[360px] bg-background flex items-center justify-center relative">
+				<Card className="w-[450px] p-8 bg-card shadow-xl z-20 absolute left-[-64%] border-border">
 					<Tabs defaultValue="login" className="w-full">
 						<TabsList className="grid w-full grid-cols-2 mb-8">
 							<TabsTrigger value="login" onClick={() => setIsLogin(true)}>
@@ -53,7 +83,7 @@ export default function AuthPage() {
 							</TabsTrigger>
 						</TabsList>
 						<TabsContent value="login">
-							<form className="space-y-4">
+							<form className="space-y-4" onSubmit={handleLogin}>
 								<div className="space-y-2">
 									<Label htmlFor="email">Email</Label>
 									<Input
@@ -61,15 +91,27 @@ export default function AuthPage() {
 										type="email"
 										placeholder="m@example.com"
 										required
+										value={email}
+										onChange={(e) => setEmail(e.target.value)}
 									/>
 								</div>
 								<div className="space-y-2">
 									<Label htmlFor="password">Password</Label>
-									<Input id="password" type="password" required />
+									<Input
+										id="password"
+										type="password"
+										required
+										value={password}
+										onChange={(e) => setPassword(e.target.value)}
+									/>
 								</div>
 								<div className="flex items-center justify-between">
 									<div className="flex items-center space-x-2">
-										<Checkbox id="remember" />
+										<Checkbox
+											id="remember"
+											checked={rememberMe}
+											onChange={() => setRememberMe(!rememberMe)}
+										/>
 										<label htmlFor="remember" className="text-sm">
 											Remember me
 										</label>
@@ -87,14 +129,16 @@ export default function AuthPage() {
 							</form>
 						</TabsContent>
 						<TabsContent value="register">
-							<form className="space-y-4">
+							<form className="space-y-4" onSubmit={handleRegister}>
 								<div className="space-y-2">
 									<Label htmlFor="name">Full Name</Label>
 									<Input
 										id="name"
-										placeholder="Jhon Doe"
+										placeholder="John Doe"
 										type="text"
 										required
+										value={name}
+										onChange={(e) => setName(e.target.value)}
 									/>
 								</div>
 								<div className="space-y-2">
@@ -104,11 +148,19 @@ export default function AuthPage() {
 										type="email"
 										placeholder="m@example.com"
 										required
+										value={email}
+										onChange={(e) => setEmail(e.target.value)}
 									/>
 								</div>
 								<div className="space-y-2">
 									<Label htmlFor="password">Password</Label>
-									<Input id="password" type="password" required />
+									<Input
+										id="password"
+										type="password"
+										required
+										value={password}
+										onChange={(e) => setPassword(e.target.value)}
+									/>
 								</div>
 								<div className="flex items-center space-x-2">
 									<Checkbox id="terms" required />
@@ -132,25 +184,6 @@ export default function AuthPage() {
 							</form>
 						</TabsContent>
 					</Tabs>
-
-					{/* Social login options
-						<div className="mt-6">
-							<Separator className="my-4">
-								<span className="px-2 text-muted-foreground text-sm">
-									Or continue with
-								</span>
-							</Separator>
-							<div className="flex space-x-4">
-								<Button variant="outline" className="w-full">
-									<Github className="mr-2 h-4 w-4" />
-									GitHub
-								</Button>
-								<Button variant="outline" className="w-full">
-									<Twitter className="mr-2 h-4 w-4" />
-									Twitter
-								</Button>
-							</div>
-						</div> */}
 
 					{/* Additional details */}
 					<div className="mt-6 text-center text-sm">

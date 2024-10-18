@@ -16,11 +16,13 @@ import SearchResultsPage from "./pages/SearchResultsPage";
 import TrackOrderPage from "./pages/TrackOrderPage";
 import ProfilePage from "./pages/ProfilePage";
 import SellerPage from "./pages/SellerPage";
+import { Toaster } from "sonner";
 
 function App() {
 	return (
 		<div className="w-full h-full  pt-16">
 			<Navbar />
+			<Toaster />
 			<Routes>
 				<Route path="/" element={<div>hi</div>} />
 				<Route path="/auth" element={<AuthPage />} />
