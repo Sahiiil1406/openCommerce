@@ -19,6 +19,23 @@ const reviewSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
+    context:{
+      type:Object,
+      default:{
+        location:{
+          type:String,
+          default:"India"
+        },
+        currency:{
+          type:String,
+          default:"INR"
+        },
+        url:{
+          type:String,
+          default:"http://localhost:8002"
+        }
+      }
+    }
   },
   {
     timestamps: true,
