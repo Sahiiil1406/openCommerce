@@ -6,7 +6,7 @@ import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
 import { Checkbox } from "@/components/ui/checkbox";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useRegisterMutation, useLoginMutation } from "@/store/slice/user";
 import { toast } from "sonner";
 
@@ -19,12 +19,17 @@ export default function AuthPage() {
 	const [register] = useRegisterMutation();
 	const [login] = useLoginMutation();
 
+
+	const navigate = useNavigate();
 	const handleLogin = async (e) => {
 		e.preventDefault();
 		try {
 			const result = await login({ email, password }).unwrap();
 			toast.success("Logged in successfully!");
 			// Handle successful login (e.g., redirect)
+			navigate("/suggested");
+			
+			
 		} catch (error) {
 			toast.error(error.data?.message || "Login failed.");
 		}

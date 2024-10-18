@@ -12,6 +12,7 @@ import {
 } from "@/components/ui/select";
 import { toast } from "sonner";
 import { MapPin, Clock, Phone } from "lucide-react";
+import {useGetOrderByIdMutation} from "@/store/slice/order";
 
 const OrderDetails = () => {
 	const [address, setAddress] = useState({
@@ -23,12 +24,29 @@ const OrderDetails = () => {
 	const [preferredTime, setPreferredTime] = useState("");
 	const [phoneNumber, setPhoneNumber] = useState("");
 	const [previousAddresses, setPreviousAddresses] = useState([]);
+	const [getOrderById] = useGetOrderByIdMutation();
+    
+
+	const getOrder = async () => {
+		const response = await getOrderById({ id:"67128dc3137d7939e9acfe72" });
+		console.log(response);
+		if (response.error) {
+			toast.error("Failed to fetch order details.");
+		} else {
+			const { data } = response;
+			setAddress(data.address || "Manglore");
+			setPreferredTime(data.preferredTime || "12:00");
+			setPhoneNumber(data.phoneNumber ||"64665836" );
+		}
+	};
+
 
 	useEffect(() => {
 		const storedAddresses = localStorage.getItem("previousAddresses");
 		if (storedAddresses) {
 			setPreviousAddresses(JSON.parse(storedAddresses));
 		}
+		getOrder();
 	}, []);
 
 	const saveAddress = () => {

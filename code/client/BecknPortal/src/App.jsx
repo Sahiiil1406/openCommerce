@@ -17,8 +17,9 @@ import TrackOrderPage from "./pages/TrackOrderPage";
 import ProfilePage from "./pages/ProfilePage";
 import SellerPage from "./pages/SellerPage";
 import { Toaster } from "sonner";
-
+import {GoogleTranslate} from "./language";
 function App() {
+<<<<<<< HEAD
 	return (
 		<div className="w-full h-full  pt-16">
 			<Navbar />
@@ -43,6 +44,33 @@ function App() {
 			</Routes>
 		</div>
 	);
+=======
+  return (
+    <div className="w-full h-full  pt-16">
+      <Navbar />
+      <Toaster />
+      <Routes>
+        <Route path="/" element={<div>hi</div>} />
+        <Route path="/auth" element={<AuthPage />} />
+        <Route path="/suggested" element={<SuggestedPage />} />
+        <Route path="/product/:productId" element={<ProductPage />} />
+        <Route path="/orderconfirm" element={<OrderConfirmPage />} />
+        <Route path="/orderdetails" element={<OrderDetails />} />
+        <Route path="/order" element={<TrackOrderPage />} />
+        <Route path="/profile" element={<ProfilePage />} />
+        <Route path="/search" element={<SearchResultsPage />} />
+        <Route path="/seller" element={<SellerPage />} />
+        <Route path="/api" element={<ApiDashboard />} />
+        <Route path="/pricing" element={<Pricing />} />{" "}
+        <Route path="/docs" element={<Docs />} />{" "}
+        <Route path="/help" element={<Help />} />{" "}
+        <Route path="/lp" element={<LandingPage />} />{" "}
+        <Route path="/lang" element={<GoogleTranslate />} />{" "}
+        
+      </Routes>
+    </div>
+  );
+>>>>>>> a709931dbfed29dab9e70b5f39d89054a3942576
 }
 
 export default App;
