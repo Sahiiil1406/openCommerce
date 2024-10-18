@@ -1,7 +1,7 @@
 const User = require("../models/User.model");
 const jwt = require("jsonwebtoken");
 
-export const loginUser = async (req, res) => {
+const loginUser = async (req, res) => {
   const { email, password } = req.body;
   try {
     const user = await User.findOne({ email: email });
@@ -33,7 +33,7 @@ export const loginUser = async (req, res) => {
   }
 };
 
-export const registerUser = async (req, res) => {
+const registerUser = async (req, res) => {
   const { name, email, password } = req.body;
 
   try {
@@ -74,7 +74,7 @@ export const registerUser = async (req, res) => {
   }
 };
 
-export const logoutUser = (req, res) => {
+const logoutUser = (req, res) => {
   res.clearCookie("token", {
     httpOnly: true,
     expires: new Date(0),
@@ -83,7 +83,7 @@ export const logoutUser = (req, res) => {
   res.status(200).json({ mssg: "User logged out successfully" });
 };
 
-export const getUserProfile = async (req, res) => {
+const getUserProfile = async (req, res) => {
   //we are logged in means we have a token which ensures that we are logged in and we have access to the req.user object it is basically a document without the password
   try {
     const user = await User.findById(req.user._id);
@@ -103,7 +103,7 @@ export const getUserProfile = async (req, res) => {
   }
 };
 
-export const updateUserProfile = async (req, res) => {
+const updateUserProfile = async (req, res) => {
   try {
     const user = await User.findById(req.user._id);
     if (user) {
@@ -124,4 +124,12 @@ export const updateUserProfile = async (req, res) => {
   } catch (error) {
     res.status(400).json({ error: error.message });
   }
+};
+
+module.exports = {
+  registerUser,
+  logoutUser,
+  loginUser,
+  getUserProfile,
+  updateUserProfile,
 };

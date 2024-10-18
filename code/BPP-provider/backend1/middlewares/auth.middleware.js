@@ -1,7 +1,7 @@
 const jwt = require("jsonwebtoken");
 const User = require("../models/User.model");
 
-export const validateToken = async (req, res, next) => {
+const validateToken = async (req, res, next) => {
   const { token } = req.body;
   if (token) {
     try {
@@ -16,3 +16,5 @@ export const validateToken = async (req, res, next) => {
     res.status(404).json({ mssg: "Token not found" });
   }
 };
+
+module.exports = validateToken;

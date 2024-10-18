@@ -17,4 +17,4 @@ router.post("/:id/reviews", validateToken, createProductReview);
 router.post("/", validateToken, adminCheck, createProduct);
 router.delete("/:id", validateToken, adminCheck, deleteProduct);
 
-export default router;
+module.exports = router;

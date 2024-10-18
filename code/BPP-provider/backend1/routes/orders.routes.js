@@ -18,4 +18,4 @@ router.put("/:id/pay", validateToken, updateOrderToPaid);
 router.post("/checkout", validateToken, checkout);
 router.post("/paymentverification/:id", validateToken, paymentVerification);
 
-export default router;
+module.exports = router;

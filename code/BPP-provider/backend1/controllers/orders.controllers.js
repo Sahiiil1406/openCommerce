@@ -2,7 +2,7 @@ const Order = require("../models/Order.model");
 const crypto = require("crypto");
 const { instance } = require("../index");
 
-export const checkout = async (req, res) => {
+const checkout = async (req, res) => {
   try {
     const options = {
       amount: Number(req.body.amount * 100), // amount in the smallest currency unit
@@ -17,7 +17,7 @@ export const checkout = async (req, res) => {
   }
 };
 
-export const paymentVerification = async (req, res) => {
+const paymentVerification = async (req, res) => {
   try {
     // console.log(req.body)
     const { id } = req.body;
@@ -66,7 +66,7 @@ export const paymentVerification = async (req, res) => {
   }
 };
 
-export const addOrderItems = async (req, res) => {
+const addOrderItems = async (req, res) => {
   const {
     orderItems,
     shippingAddress,
@@ -101,7 +101,7 @@ export const addOrderItems = async (req, res) => {
   }
 };
 
-export const getMyOrders = async (req, res) => {
+const getMyOrders = async (req, res) => {
   try {
     const orders = await Order.find({ user: req.user._id });
     res.status(200).json(orders);
@@ -110,7 +110,7 @@ export const getMyOrders = async (req, res) => {
   }
 };
 
-export const getOrderById = async (req, res) => {
+const getOrderById = async (req, res) => {
   const id = req.body.id;
   const order = await Order.findById(id).populate("user", "name email");
 
@@ -121,6 +121,15 @@ export const getOrderById = async (req, res) => {
   }
 };
 
-export const updateOrderToPaid = async (req, res) => {
+const updateOrderToPaid = async (req, res) => {
   res.send("updated");
+};
+
+module.exports = {
+  checkout,
+  paymentVerification,
+  addOrderItems,
+  getMyOrders,
+  getOrderById,
+  updateOrderToPaid,
 };

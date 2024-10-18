@@ -1,6 +1,6 @@
 const Product = require("../models/Product.model");
 
-export const getAllProducts = async (req, res) => {
+const getAllProducts = async (req, res) => {
   //here we are creating the query object which is the keywords so here we are searching for the keyword that is coming from the params
   const search = req.body.search
     ? {
@@ -25,7 +25,7 @@ export const getAllProducts = async (req, res) => {
   }
 };
 
-export const getSingleProduct = async (req, res) => {
+const getSingleProduct = async (req, res) => {
   try {
     const id = req.params.id;
     const product = await Product.findById(id);
@@ -36,7 +36,7 @@ export const getSingleProduct = async (req, res) => {
   }
 };
 
-export const createProductReview = async (req, res) => {
+const createProductReview = async (req, res) => {
   const { rating, comment } = req.body;
   try {
     const product = await Product.findById(req.params.id);
@@ -82,7 +82,7 @@ export const createProductReview = async (req, res) => {
   }
 };
 
-export const createProduct = async (req, res) => {
+const createProduct = async (req, res) => {
   try {
     const product = new Product({
       name: "Sample name",
@@ -104,7 +104,7 @@ export const createProduct = async (req, res) => {
   }
 };
 
-export const deleteProduct = async (req, res) => {
+const deleteProduct = async (req, res) => {
   const product = await Product.findById(req.params.id);
 
   try {
@@ -121,4 +121,12 @@ export const deleteProduct = async (req, res) => {
       error: error.message,
     });
   }
+};
+
+module.exports = {
+  getAllProducts,
+  getSingleProduct,
+  createProductReview,
+  createProduct,
+  deleteProduct,
 };
