@@ -18,10 +18,10 @@ export default function AuthPage() {
 			<div
 				className="flex-1 bg-cover bg-center bg-yellow-600"
 				style={{
-					backgroundImage: "url('/placeholder.svg?height=1080&width=1080')",
+					backgroundImage: "url('loginbg.svg')",
 				}}
 			>
-				<div className="h-full w-full bg-black bg-opacity-30 flex items-center justify-center">
+				<div className="h-full w-full   flex items-center justify-center">
 					<div className="text-white text-center max-w-md px-4">
 						<h1 className="text-4xl font-bold mb-4">Welcome to Our Platform</h1>
 						<p className="text-xl mb-6">
@@ -42,7 +42,7 @@ export default function AuthPage() {
 			{/* Left side - Plain background with form */}
 			<div className="w-[360px] bg-background flex items-center justify-center relative  ">
 				{/* Form container */}
-				<Card className="w-[450px] p-8 bg-card shadow-xl  z-20  absolute left-[-50%] border-border">
+				<Card className="w-[450px] p-8 bg-card shadow-xl  z-20  absolute left-[-64%] border-border">
 					<Tabs defaultValue="login" className="w-full">
 						<TabsList className="grid w-full grid-cols-2 mb-8">
 							<TabsTrigger value="login" onClick={() => setIsLogin(true)}>

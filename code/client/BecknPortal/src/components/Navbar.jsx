@@ -23,7 +23,7 @@ export default function Navbar() {
 		location.pathname.startsWith("/orders");
 
 	return (
-		<header className="w-full border-b border-border z-50 fixed top-0 bg-black px-6">
+		<header className="w-full border-b border-border z-50 fixed top-0 bg-white px-6">
 			<div className=" flex h-16 items-center justify-between">
 				<Link to="/" className="flex items-center space-x-2">
 					<ShoppingCart className="h-6 w-6 " />
@@ -155,7 +155,7 @@ export default function Navbar() {
 							) : (
 								<>
 									<li>
-										<Link to="/productHome">product</Link>
+										<Link to="/suggested">Suggested</Link>
 									</li>
 									<li>
 										<Link to="/search">search</Link>
@@ -175,7 +175,7 @@ export default function Navbar() {
 									<li>
 										<Link to="/orders">orders</Link>
 									</li>
-									
+
 									<NavigationMenuItem>
 										<NavigationMenuTrigger>Docs</NavigationMenuTrigger>
 										<NavigationMenuContent className="">

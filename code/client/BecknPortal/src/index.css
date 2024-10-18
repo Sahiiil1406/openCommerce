@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 body {
-	background-color: black;
+	background-color: white;
 }
 
 @layer base {
