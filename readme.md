@@ -1,7 +1,7 @@
 # TEAM ALGORYTHMS - Beckn Protocol Implementation
 
 ## Team Members
-1. Davejyoti Pandit
+1. Debajyoti Pandit
 2. Sahil Kumar
 3. Sahil Mengji
 
