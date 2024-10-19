@@ -116,3 +116,10 @@ After completing these steps, open your web browser and navigate to `http://loca
 - [Tailwind CSS](https://tailwindcss.com/)
 - [Express.js](https://expressjs.com/)
 - [MongoDB](https://www.mongodb.com/)
+
+## SnapShots
+![Screenshot_19-10-2024_92610_localhost](https://github.com/user-attachments/assets/dc382825-39d1-4e46-9c79-1aca2d48310a)
+![Screenshot_19-10-2024_8294_localhost](https://github.com/user-attachments/assets/0c8a5066-332d-4328-85c8-1216194a3a39)
+![Screenshot_19-10-2024_82951_localhost](https://github.com/user-attachments/assets/138b2e3f-ec11-4a64-af4e-e444df40da1d)
+![Screenshot_19-10-2024_82843_localhost](https://github.com/user-attachments/assets/4df1ad95-3906-46f7-b606-d3748613863b)
+
