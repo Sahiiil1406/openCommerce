@@ -15,6 +15,7 @@ The Beckn Protocol is an open-source standard enabling seamless interoperability
 3. **Order Management**
 
 ## Our Approach
+![WhatsApp Image 2024-10-18 at 09 58 07_f8d4b0d8](https://github.com/user-attachments/assets/54b06e2a-5694-42ff-a33f-412d227cb6f3)
 
 The Beckn protocol facilitates interactions between buyers and sellers across various digital platforms, allowing small businesses to become part of a larger e-commerce ecosystem. It standardizes how services are discovered, ordered, fulfilled, and paid for.
 
