@@ -1,0 +1,13 @@
+body {
+  position: static !important;
+  top: 0px !important;
+}
+.skiptranslate {
+  display: none !important;
+}
+.goog-te-banner-frame {
+  display: none !important;
+}
+#google_translate_element {
+  display: none !important;
+}

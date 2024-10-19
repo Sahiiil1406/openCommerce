@@ -1,217 +1,264 @@
-import { useState, Suspense, useEffect } from "react";
-
-import { Star, ArrowUpDown } from "lucide-react";
-import { Slider } from "@/components/ui/slider";
-import { Checkbox } from "@/components/ui/checkbox";
-import { Skeleton } from "@/components/ui/skeleton";
+import React from "react";
+import { ChevronLeft, ChevronRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { Star, Percent } from "lucide-react";
+import { Card, CardContent } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
+import { cn } from "@/lib/utils";
 import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
-import ProductCard from "../components/ProductCard";
-import { useSearchMutation } from "../store/slice/product";
+	Carousel,
+	CarouselContent,
+	CarouselItem,
+	CarouselNext,
+	CarouselPrevious,
+} from "@/components/ui/carousel";
+import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
 
+export default function SuggestedPage() {
+	const categories = [
+		"Electronics",
+		"Fashion",
+		"Home & Garden",
+		"Sports",
+		"Beauty",
+		"Toys",
+		"Automotive",
+		"Books",
+	];
 
-const dummyProducts = [
-  {
-    id: 1,
-    name: "Wireless Headphones",
-    price: 99.99,
-    rating: 4.5,
-    image: "/placeholder.svg?height=200&width=200",
-  },
-  {
-    id: 2,
-    name: "Smart Watch",
-    price: 199.99,
-    rating: 4.2,
-    image: "/placeholder.svg?height=200&width=200",
-  },
-  {
-    id: 3,
-    name: "Laptop",
-    price: 999.99,
-    rating: 4.8,
-    image: "/placeholder.svg?height=200&width=200",
-  },
-  {
-    id: 4,
-    name: "Smartphone",
-    price: 699.99,
-    rating: 4.6,
-    image: "/placeholder.svg?height=200&width=200",
-  },
-  {
-    id: 5,
-    name: "Tablet",
-    price: 349.99,
-    rating: 4.3,
-    image: "/placeholder.svg?height=200&width=200",
-  },
-  {
-    id: 6,
-    name: "Bluetooth Speaker",
-    price: 79.99,
-    rating: 4.1,
-    image: "/placeholder.svg?height=200&width=200",
-  },
-];
+	const featuredProducts = [
+		{
+			name: "Smart Watch",
+			price: 199.99,
+			image: "/placeholder.svg", // Ensure this path is correct
+		},
+		{
+			name: "Wireless Earbuds",
+			price: 89.99,
+			image: "/placeholder.svg",
+		},
+		{
+			name: "4K TV",
+			price: 599.99,
+			image: "/placeholder.svg",
+		},
+		{
+			name: "Laptop",
+			price: 999.99,
+			image: "/placeholder.svg",
+		},
+	];
 
-export default function SearchResultsPage() {
-  const [sortOrder, setSortOrder] = useState("featured");
-  const [searchQuery, setSearchQuery] = useState("Electronics");
-  const [query, setQuery] = useState("");
-  const [searchResult, setSearchResult] = useState(dummyProducts);
+	const platforms = ["Amazon", "eBay", "Etsy", "Walmart", "Target"];
 
-  const [search] = useSearchMutation();
-  const handleSearch = async () => {
-    const result = await search({ search: query }).unwrap();
-    setSearchResult(result.gateway.result);
-    console.log(result.gateway.result);
-  };
+	const suggestedProducts = [
+		{
+			name: "Coffee Maker",
+			price: 49.99,
+			image: "/placeholder.svg",
+		},
+		{
+			name: "Fitness Tracker",
+			price: 79.99,
+			image: "/placeholder.svg",
+		},
+		{
+			name: "Bluetooth Speaker",
+			price: 39.99,
+			image: "/placeholder.svg",
+		},
+		{
+			name: "Tablet",
+			price: 299.99,
+			image: "/placeholder.svg",
+		},
+		{
+			name: "Digital Camera",
+			price: 249.99,
+			image: "/placeholder.svg",
+		},
+		{
+			name: "Gaming Console",
+			price: 399.99,
+			image: "/placeholder.svg",
+		},
+	];
 
-  useEffect(() => {
-    handleSearch();
-  }, [query]);
-  return (
-    <div className="container mx-auto px-4 py-8">
-      <h1 className="text-2xl font-bold mb-6">Search Results</h1>
-      <p className="text-gray-600 mb-4">
-        Showing results for: <strong>{searchQuery}</strong>
-      </p>
-      <div className="flex flex-col lg:flex-row gap-8">
-        <div className="w-full lg:w-1/4">
-          <Filters />
-        </div>
-        <div className="w-full lg:w-3/4">
-          <div className="mb-4 flex justify-end">
-            <SortDropdown sortOrder={sortOrder} setSortOrder={setSortOrder} />
-          </div>
-          <Suspense fallback={<ProductGridSkeleton />}>
-            <ProductGrid sortOrder={sortOrder} searchResult={searchResult} />
-          </Suspense>
-        </div>
-      </div>
-    </div>
-  );
+	const suggestedCategories = [
+		"Smartphones",
+		"Laptops",
+		"Headphones",
+		"Smart Home",
+		"Wearables",
+	];
+
+	const deals = [
+		{
+			name: "50% off Electronics",
+			price: "From $49.99",
+			image: "/placeholder.svg",
+		},
+		{
+			name: "Buy 2 Get 1 Free on Books",
+			price: "From $9.99",
+			image: "/placeholder.svg",
+		},
+		{
+			name: "Free Shipping on orders over $50",
+			price: "Min. purchase $50",
+			image: "/placeholder.svg",
+		},
+	];
+
+	return (
+		<div className="container mx-auto">
+			{/* Categories ScrollView */}
+			<section className="mb-12 w-full">
+				<ScrollArea className="w-full whitespace-nowrap rounded-md border border-border">
+					<div className="flex w-max space-x-4 p-4">
+						{categories.map((category, index) => (
+							<Button key={index} variant="outline" className="flex-shrink-0">
+								{category}
+							</Button>
+						))}
+					</div>
+					<ScrollBar orientation="horizontal" />
+				</ScrollArea>
+			</section>
+
+			{/* Featured Products Carousel */}
+			<section className="mb-12">
+				<h2 className="text-2xl font-bold mb-4">Featured Products</h2>
+				<Carousel className="w-full max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg xl:max-w-xl mx-auto">
+					<CarouselContent>
+						{featuredProducts.map((product, index) => (
+							<CarouselItem key={index}>
+								<ProductCard product={product} />
+							</CarouselItem>
+						))}
+					</CarouselContent>
+					<CarouselPrevious>
+						<ChevronLeft />
+					</CarouselPrevious>
+					<CarouselNext>
+						<ChevronRight />
+					</CarouselNext>
+				</Carousel>
+			</section>
+
+			{/* Platforms */}
+			<section className="mb-12">
+				<h2 className="text-2xl font-bold mb-4">Shop by Platform</h2>
+				<div className="flex flex-wrap gap-4">
+					{platforms.map((platform, index) => (
+						<Button key={index} variant="outline">
+							{platform}
+						</Button>
+					))}
+				</div>
+			</section>
+
+			{/* Suggested Products */}
+			<section className="mb-12">
+				<h2 className="text-2xl font-bold mb-4">Suggested for You</h2>
+				<div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4">
+					{suggestedProducts.map((product, index) => (
+						<ProductCard key={index} product={product} />
+					))}
+				</div>
+			</section>
+
+			{/* Suggested Categories */}
+			<section className="mb-12">
+				<h2 className="text-2xl font-bold mb-4">Explore Categories</h2>
+				<div className="flex flex-wrap gap-4">
+					{suggestedCategories.map((category, index) => (
+						<Button key={index} variant="secondary">
+							{category}
+						</Button>
+					))}
+				</div>
+			</section>
+
+			{/* Deals */}
+			<section>
+				<h2 className="text-2xl font-bold mb-4">Today's Deals</h2>
+				<div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+					{deals.map((deal, index) => (
+						<ProductCard key={index} product={deal} />
+					))}
+				</div>
+			</section>
+		</div>
+	);
 }
 
-function Filters() {
-  return (
-    <div className="bg-white rounded-lg shadow-md p-6">
-      <h2 className="text-xl font-semibold mb-4">Filters</h2>
+export function ProductCard({
+	product,
+	truncateAfter = 50,
+	showPercentageDrop = false,
+	originalPrice = 0,
+}) {
+	const percentageDrop =
+		originalPrice && showPercentageDrop
+			? Math.round((1 - product.price / originalPrice) * 100)
+			: null;
 
-      <div className="mb-6">
-        <h3 className="font-medium mb-2">Location</h3>
-        <input
-          type="text"
-          placeholder="Enter location"
-          className="w-full px-3 py-2 border rounded-md"
-        />
-      </div>
-
-      <div className="mb-6">
-        <h3 className="font-medium mb-2">Category</h3>
-        {["Electronics", "Clothing", "Books", "Home & Garden"].map(
-          (category) => (
-            <div key={category} className="flex items-center mb-2">
-              <Checkbox id={category} />
-              <label htmlFor={category} className="ml-2 text-sm">
-                {category}
-              </label>
-            </div>
-          )
-        )}
-      </div>
-
-      <div className="mb-6">
-        <h3 className="font-medium mb-2">Rating</h3>
-        <Slider defaultValue={[3]} max={5} step={1} />
-      </div>
-
-      <div>
-        <h3 className="font-medium mb-2">Price Range</h3>
-        <div className="flex items-center space-x-4">
-          <input
-            type="number"
-            placeholder="Min"
-            className="w-1/2 px-3 py-2 border rounded-md"
-          />
-          <input
-            type="number"
-            placeholder="Max"
-            className="w-1/2 px-3 py-2 border rounded-md"
-          />
-        </div>
-      </div>
-    </div>
-  );
-}
-
-function SortDropdown({ sortOrder, setSortOrder }) {
-  return (
-    <DropdownMenu>
-      <DropdownMenuTrigger asChild>
-        <Button variant="outline">
-          <ArrowUpDown className="mr-2 h-4 w-4" />
-          Sort by: {sortOrder}
-        </Button>
-      </DropdownMenuTrigger>
-      <DropdownMenuContent align="end">
-        <DropdownMenuItem onClick={() => setSortOrder("featured")}>
-          Featured
-        </DropdownMenuItem>
-        <DropdownMenuItem onClick={() => setSortOrder("price_low_to_high")}>
-          Price: Low to High
-        </DropdownMenuItem>
-        <DropdownMenuItem onClick={() => setSortOrder("price_high_to_low")}>
-          Price: High to Low
-        </DropdownMenuItem>
-        <DropdownMenuItem onClick={() => setSortOrder("rating")}>
-          Highest Rated
-        </DropdownMenuItem>
-      </DropdownMenuContent>
-    </DropdownMenu>
-  );
-}
-
-function ProductGrid({ sortOrder, searchResult }) {
-  const sortedProducts = [...dummyProducts].sort((a, b) => {
-    switch (sortOrder) {
-      case "price_low_to_high":
-        return a.price - b.price;
-      case "price_high_to_low":
-        return b.price - a.price;
-      case "rating":
-        return b.rating - a.rating;
-      default:
-        return 0;
-    }
-  });
-
-  return (
-    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-      {sortedProducts.map((product) => (
-        <ProductCard product={product} />
-      ))}
-    </div>
-  );
-}
-
-function ProductGridSkeleton() {
-  return (
-    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-      {[...Array(6)].map((_, i) => (
-        <div key={i} className="bg-white rounded-lg shadow-md p-4">
-          <Skeleton className="w-full h-48 mb-4" />
-          <Skeleton className="w-3/4 h-4 mb-2" />
-          <Skeleton className="w-1/2 h-4 mb-2" />
-          <Skeleton className="w-1/4 h-4" />
-        </div>
-      ))}
-    </div>
-  );
+	return (
+		<Card className="overflow-hidden">
+			<CardContent className="p-4">
+				<div className="relative">
+					<img
+						src={product.image}
+						alt={product.name}
+						className="w-full h-auto rounded-md object-cover aspect-square"
+					/>
+					{product.offer && (
+						<Badge variant="destructive" className="absolute top-2 left-2">
+							{product.offer}
+						</Badge>
+					)}
+					{percentageDrop && (
+						<Badge variant="secondary" className="absolute bottom-2 right-2">
+							<Percent className="w-3 h-3 mr-1" />
+							{percentageDrop}% OFF
+						</Badge>
+					)}
+				</div>
+				<h3 className="font-semibold mt-2">
+					{product.name.length > truncateAfter
+						? `${product.name.slice(0, truncateAfter)}...`
+						: product.name}
+				</h3>
+				<div className="flex items-center justify-between mt-2">
+					<p className="text-lg font-bold">
+						${parseFloat(product.price).toFixed(2)}
+					</p>
+					{originalPrice && showPercentageDrop && (
+						<p className="text-sm text-muted-foreground line-through">
+							${originalPrice.toFixed(2)}
+						</p>
+					)}
+				</div>
+				{product.rating && (
+					<div className="flex items-center mt-2">
+						{[...Array(5)].map((_, i) => (
+							<Star
+								key={i}
+								className={cn(
+									"w-4 h-4",
+									i < Math.floor(product.rating)
+										? "text-yellow-400 fill-yellow-400"
+										: "text-gray-300"
+								)}
+							/>
+						))}
+						<span className="ml-2 text-sm text-muted-foreground">
+							{product.rating.toFixed(1)}
+						</span>
+					</div>
+				)}
+			</CardContent>
+		</Card>
+	);
 }
